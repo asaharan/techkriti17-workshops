@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 var angular = require('angular');
-window.data_api = '//m.techkriti.org/api/events/json';
+window.data_api = '//m.techkriti.org/api/register/workshop/workshops';
 var app= angular.module('myApp', [require('angular-route')]);
 app.controller('View1Ctrl',require('./view1/view1'));
 app.controller('View2Ctrl',require('./view2/view2'));
@@ -13,7 +13,7 @@ app
     templateUrl: './view1/view1.html',
     controller: 'View1Ctrl'
   })
-  .when('/:cat/:sub/:event', {
+  .when('/:workshop', {
       templateUrl: './view2/view2.html',
       controller: 'View2Ctrl'
   });
@@ -183,7 +183,6 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		"IMP":['Innovation in Manufacturing Practices'],
 		"Robotics": ['IARC','IRGT'],
 	}
-	console.log(window.workshops)
 	$scope.workshops = window.workshops;
 	$scope.category = "Technical";
 	$scope.selected = {
@@ -212,7 +211,7 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		}
 	}
 
-	if(!window.json_data){
+	if(!window.workshops){
 		$http({
 			method:'GET',
 			withCredentials:true,
@@ -220,14 +219,14 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		})
 		.then(function(res){
 			console.log(res);
-			window.json_data = res.data;
+			window.workshops = res.data;
 		});
 	}
 }];
 },{}],3:[function(require,module,exports){
 module.exports = ['$scope','$routeParams','$http','$timeout', function($scope, $routeParams, $http, $timeout) {
 
-	$scope.events = window.json_data || {};
+	$scope.events = window.workshops || {};
 
 	/*
 	*Puller code starts
@@ -271,7 +270,7 @@ module.exports = ['$scope','$routeParams','$http','$timeout', function($scope, $
 
 	// console.log($routeParams);
 	$scope.dataLoaded = false;
-	$scope.selected = {category:$routeParams.cat, subcategory:$routeParams.sub, event:$routeParams.event,tab:'Home'};
+	$scope.selected = {workshop:$routeParams.workshop,category:$routeParams.cat, subcategory:$routeParams.sub, event:$routeParams.event,tab:'Home'};
 
 	$scope.categories = window.categories;
 	$scope.subcategories = window.subcategories;
@@ -281,11 +280,11 @@ module.exports = ['$scope','$routeParams','$http','$timeout', function($scope, $
 	$scope.event = {};
 	function init(data){
 		// console.log(data);
-		var sibblingEvents = data.events[$scope.selected.subcategory];
+		var sibblingEvents = data;
 		var eventFound = false;
 		// console.log($scope, sibblingEvents)
 		for(var i =0; i < sibblingEvents.length; i++){
-			if(sibblingEvents[i].title.trim() == $scope.selected.event.trim()){
+			if(sibblingEvents[i].workshop.trim() == $scope.selected.workshop.trim()){
 				$scope.event = sibblingEvents[i];
 				eventFound = true;
 				break;
@@ -313,11 +312,11 @@ module.exports = ['$scope','$routeParams','$http','$timeout', function($scope, $
 		}
 	}
 
-	if(window.json_data){
+	if(window.workshops){
 		console.log('Already loaded information');
-		$scope.events = json_data.events;
-		$scope.subcategories = json_data.subcategories;
-		init(window.json_data);
+		$scope.events = window.workshops;
+		$scope.subcategories = window.workshops.subcategories;
+		init(window.workshops);
 	}else{
 		$http({
 			method:'GET',
@@ -327,8 +326,8 @@ module.exports = ['$scope','$routeParams','$http','$timeout', function($scope, $
 		})
 		.then(function(r){
 			var res = r.data;
-			window.json_data = res;
-			$scope.events = res.events;
+			window.workshops = res;
+			$scope.events = res;
 			$scope.subcategories = res.subcategories;
 			init(res);
 		});

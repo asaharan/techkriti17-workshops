@@ -56,7 +56,6 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		"IMP":['Innovation in Manufacturing Practices'],
 		"Robotics": ['IARC','IRGT'],
 	}
-	console.log(window.workshops)
 	$scope.workshops = window.workshops;
 	$scope.category = "Technical";
 	$scope.selected = {
@@ -85,7 +84,7 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		}
 	}
 
-	if(!window.json_data){
+	if(!window.workshops){
 		$http({
 			method:'GET',
 			withCredentials:true,
@@ -93,7 +92,7 @@ module.exports =['$scope','$http','$sce',function($scope,$http,$sce) {
 		})
 		.then(function(res){
 			console.log(res);
-			window.json_data = res.data;
+			window.workshops = res.data;
 		});
 	}
 }];

@@ -1,6 +1,6 @@
 'use strict';
 var angular = require('angular');
-window.data_api = '//m.techkriti.org/api/events/json';
+window.data_api = '//m.techkriti.org/api/register/workshop/workshops';
 var app= angular.module('myApp', [require('angular-route')]);
 app.controller('View1Ctrl',require('./view1/view1'));
 app.controller('View2Ctrl',require('./view2/view2'));
@@ -12,7 +12,7 @@ app
     templateUrl: './view1/view1.html',
     controller: 'View1Ctrl'
   })
-  .when('/:cat/:sub/:event', {
+  .when('/:workshop', {
       templateUrl: './view2/view2.html',
       controller: 'View2Ctrl'
   });
