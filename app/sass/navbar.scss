@@ -1,0 +1,47 @@
+.navbar{
+	line-height: $navH;
+	// box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+	background-color: rgba(255,255,255,0.98);
+	border-bottom: solid 1px #eee;
+	@include display(flex);
+	@include justify-content(space-between);
+	@include flex-wrap(no-wrap);
+	font-size: 15px;
+	&.fixed{
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		border-bottom: none;
+	}
+	.left-side{
+		@include display(flex);
+		@include justify-content(flex-start);
+		@include flex-wrap(wrap);
+		.techkriti-logo-container{
+			img{
+				height: 2*$navH/4;
+				margin-top: -2px;
+				margin-left: 12px;
+				margin-right: 6px;
+			}
+		}
+		a{
+			padding: 0 6px;
+			display: inline-block;
+			transition: all ease 180ms;
+			height: $navH;
+			&:hover{
+				color: $fav-color;
+				border-bottom: 3px solid;
+			}
+		}
+	}
+	.right-side{
+		a{
+			margin-right: 12px;
+		}
+	}
+}

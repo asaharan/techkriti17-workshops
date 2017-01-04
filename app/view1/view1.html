@@ -1,0 +1,44 @@
+<div class="homepage">
+	<div class="navbar">
+		<div class="left-side">
+			<a href=".." class="techkriti-logo-container">
+				<img src="./img/kachkachblue.png">
+			</a>
+			<a href="../hospitality">Hospitality</a>
+			<a href="../sponsors">Sponsors</a>
+			<a href="../contacts">Contacts</a>
+		</div>
+		<div class="right-side">
+			<a>Login</a>
+			<a>Sign up</a>
+		</div>
+	</div>
+	<div class="cover-image-container" style="height: 400px; overflow: hidden;">
+		<img src="./img/bg.jpg">
+	</div>
+	<div class="main-content">
+		<div class="logo-and-stuff">
+			<div class="competitions-logo-container">
+				<span class="competitions-logo">Competitions</span>
+				<span class="underline"></span>
+				<div class="tagline">Factualizing&nbsp;Fiction</div>
+			</div>
+		</div>
+		<div class="categories-container">
+			<div ng-click="selectCategory(c)" class="category-container blabla" ng-class="{chosen: (c.title == selected.category) }" ng-repeat="c in workshops track by c.workshop">
+				<div class="category-perspective-container">
+					<div class="category-image-container">
+						<img ng-src="https://2016.techkriti.org/workshops/images/n/{{c.image}}">
+					</div>
+					<div class="category-color-overlay"></div>
+					<div class="category-title-container">
+						<div class="text">
+							<span>{{c.workshop}}</span>
+						</div>
+					</div>
+				</div>
+				<span class="category-perspective-container-overlay"></span>
+			</div>
+		</div>
+	</div>
+</div>

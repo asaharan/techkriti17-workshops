@@ -1,0 +1,77 @@
+<div class="eventpage">
+	<div class="navbar fixed">
+		<div class="left-side">
+			<a ng-click="track('puller')" class="arrow-button toOpen" style="width: 56px;display: inline-block;">&nbsp;</a>
+			<a href="../" class="techkriti-logo-container">
+				<img src="./img/kachkachblue.png">
+			</a>
+		</div>
+	</div>
+	<div class="scrollble-tabs-container">
+		<div class="scrollble-tabs">
+			<div class="scrollable-tabs-helper">
+				<div ng-click="selectTab(tab.title)" data-dataLoaded="{{dataLoaded}}" ng-class="{true: (tab.title==selected.tab)}" class="tab" ng-repeat="tab in event.desc">{{tab.title}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="event-title-and-buttons">
+		<div class="event-title-and-shadow-container">
+			<span class="event-title">{{event.title}}</span>
+		</div>
+	</div>
+	<div class="displayble" compile="eventContent" window-width></div>
+</div>
+
+<div ng-if="true" class="side-puller {{sidePull}}">
+	<a href="./" class="logos">
+		<div class="techkriti">
+			Competitions
+		</div>
+		<!-- <div class="techkriti">
+			<div>
+				TECHKRITI'<sup>17</sup>
+			</div>
+		</div>
+		<div>23<sup>rd</sup> - 26<sup>th</sup> March</div> -->
+	</a>
+	<div class="outer-event-container">
+		<div class="event-container">
+			<div ng-repeat="c in categories">
+				<div class="link padl1 {{sibbling.cat==c.title}}" ng-click="sibbling.cat==c.title?sibbling.cat='':sibbling.cat=c.title">
+					<span>{{c.title}}</span>
+					<span class="svg {{sibbling.cat==c.title}}">
+						<svg version="1.1" x="0px" y="0px" viewBox="0 0 48 48" fill="#8699a7" xmlns="http://www.w3.org/2000/svg" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet"><path d="M24 16l-12 12 2.83 2.83 9.17-9.17 9.17 9.17 2.83-2.83z"></path><path d="M0 0h48v48h-48z" fill="none"></path></svg>
+					</span>
+				</div>
+				<div ng-init="c.state=0" statechanger="c.state" height-when-active="{{sibbling.cat==c.title}}" class="overflow-hidden">
+					<div ng-repeat="s in subcategories[c.title]">
+						<div class="link padl2 {{sibbling.sub==s.title}}" ng-click="updateThisHeightController(s,c)">
+							<span>{{s.title}}</span>
+							<span class="svg {{sibbling.sub==s.title}}" style="margin-top: 7px;">
+								<svg version="1.1" x="0px" y="0px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet"><path fill="#8699a7" d="M24 16l-12 12 2.83 2.83 9.17-9.17 9.17 9.17 2.83-2.83z"></path><path d="M0 0h48v48h-48z" fill="none"></path></svg>
+							</span>
+						</div>
+						<div height-when-active="{{sibbling.sub==s.title}}" class="overflow-hidden">
+							<a class="link padl3 {{e.title==selectedSub}}" ng-repeat="e in GetEvents(s.title)" ng-href="#/{{c.title}}/{{s.title}}/{{e.title}}">{{e.title}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="menu-toggle" class="{{sidePull?'open':''}}" ng-click="track('puller')">
+	  <div id="hamburger">
+	    <span></span>
+	    <span></span>
+	    <span></span>
+	  </div>
+	  <div id="cross">
+	    <span></span>
+	    <span></span>
+	  </div>
+	</div>
+	<div class="arrow-button-wrapper">
+		<div ng-click="track('puller')" class="arrow-button toOpen"></div>
+		<span class="tooltip">{{sidePull?'Collapse':'Expand'}} side panel</span>
+	</div>
+</div>
